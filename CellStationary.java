@@ -4,7 +4,9 @@ import java.util.List;
 public class CellStationary extends Cell {
     
     //MAGIC NUMBER
-    private String CELL_STATIONARY_STRING = ".";
+    public String CELL_STATIONARY_STRING = ".";
+    public int CELL_STATIONARY_UPPER_BOUND = 7;
+    public int CELL_STATIONARY_LOWER_BOUND = 3;
 
     public CellStationary(int currRow, int currCol, int mass) {
         super(currRow, currCol, mass);
@@ -18,7 +20,8 @@ public class CellStationary extends Cell {
     }
 
     public boolean checkApoptosis(List<Cell> neighbors) {
-        if (neighbors.size() >= 3 && neighbors.size() <= 7) {
+        if (neighbors.size() >= CELL_STATIONARY_LOWER_BOUND && 
+                neighbors.size() <= CELL_STATIONARY_UPPER_BOUND) {
             return true;
         }
 

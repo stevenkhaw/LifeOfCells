@@ -6,7 +6,8 @@ public class CellDivide extends Cell{
     public int direction;
 
     //MAGIC NUMBER
-    private String CELL_DIVIDE_STRING = "+";
+    public String CELL_DIVIDE_STRING = "+";
+    public int CELL_DIVIDE_BOUND = 3;
 
     public CellDivide(int currRow, int currCol, int mass) {
         super(currRow, currCol, mass);
@@ -21,7 +22,7 @@ public class CellDivide extends Cell{
     }
 
     public boolean checkApoptosis(List<Cell> neighbors) {
-        if (neighbors.size() == 3) {
+        if (neighbors.size() == CELL_DIVIDE_BOUND) {
             return true;
         }
 

@@ -3,7 +3,8 @@ import java.util.List;
 public class CellMoveUp extends Cell {
     
     //MAGIC NUMBER
-    private String CELL_MOVEUP_STRING = "^";
+    public String CELL_MOVEUP_STRING = "^";
+    public int CELL_MOVEUP_BOUND = 4;
 
     public CellMoveUp(int currRow, int currCol, int mass) {
         super(currRow, currCol, mass);
@@ -17,7 +18,7 @@ public class CellMoveUp extends Cell {
     }
 
     public boolean checkApoptosis(List<Cell> neighbors) {
-        if (neighbors.size() != 4) {
+        if (neighbors.size() != CELL_MOVEUP_BOUND) {
             return true;
         }
 
