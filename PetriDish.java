@@ -1,3 +1,12 @@
+/**
+ * NAME: Steven Khaw
+ * ID: A16669117
+ * EMAIL: skhaw@ucsd.edu
+ */
+
+/**
+ * 
+ */
 public class PetriDish {
     
     //INSTANCE VARIABLE
@@ -15,6 +24,10 @@ public class PetriDish {
     private static final String VERTICAL_BAR = "|";
     private static final String NEW_LINE = "\n";
 
+    /**
+     * 
+     * @param board
+     */
     public PetriDish(String[][] board) {
 
         //CONSTANTS
@@ -64,10 +77,13 @@ public class PetriDish {
         }
     }
     
-    
+    /**
+     * 
+     * @return 
+     */
     public String toString() {
         
-        //Creation of HORIZONTAL_BARS magic number, dependant on dish[0].length
+        //Creation of HORIZONTAL_BARS magic number
         StringBuilder hb = new StringBuilder();
 
         for (int x = 0; x < dish[0].length; x++) {

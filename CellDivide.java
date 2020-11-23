@@ -1,3 +1,9 @@
+/**
+ * NAME: Steven Khaw
+ * ID: A16669117
+ * EMAIL: skhaw@ucsd.edu
+ */
+
 import java.util.List;
 
 public class CellDivide extends Cell{
@@ -6,8 +12,8 @@ public class CellDivide extends Cell{
     public int direction;
 
     //MAGIC NUMBER
-    public String CELL_DIVIDE_STRING = "+";
-    public int CELL_DIVIDE_BOUND = 3;
+    private static final String CELL_DIVIDE_STRING = "+";
+    private static final int CELL_DIVIDE_BOUND = 3;
 
     public CellDivide(int currRow, int currCol, int mass) {
         super(currRow, currCol, mass);

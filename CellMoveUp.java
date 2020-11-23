@@ -1,10 +1,16 @@
-import java.util.List;
+/**
+ * NAME: Steven Khaw
+ * ID: A16669117
+ * EMAIL: skhaw@ucsd.edu
+ */
+
+ import java.util.List;
 
 public class CellMoveUp extends Cell {
     
     //MAGIC NUMBER
-    public String CELL_MOVEUP_STRING = "^";
-    public int CELL_MOVEUP_BOUND = 4;
+    private static final String CELL_MOVEUP_STRING = "^";
+    private static final int CELL_MOVEUP_BOUND = 4;
 
     public CellMoveUp(int currRow, int currCol, int mass) {
         super(currRow, currCol, mass);
