@@ -13,9 +13,9 @@ public class CellMoveDiagonal extends CellMoveUp {
     public int diagonalMoves;
 
     //MAGIC NUMBERS
-    public String CELL_MOVE_DIAG_STRING_ON = "/";
-    public String CELL_MOVE_DIAG_STRING_OFF = "\\";
-    public int CELL_MOVE_DIAG_BOUND = 3;
+    private static String CELL_MOVE_DIAG_STRING_ON = "/";
+    private static String CELL_MOVE_DIAG_STRING_OFF = "\\";
+    private static int CELL_MOVE_DIAG_BOUND = 3;
 
     public CellMoveDiagonal(int currRow, int currCol, int mass) {
         super(currRow, currCol, mass);
