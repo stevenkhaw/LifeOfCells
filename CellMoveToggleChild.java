@@ -12,7 +12,7 @@ public class CellMoveToggleChild extends CellMoveToggle {
     public static int numAlive = 0;
 
     //MAGIC NUMBERS
-    private static int NUM_ALIVE_BOUND = 10;
+    private static final int NUM_ALIVE_BOUND = 10;
 
     public CellMoveToggleChild(int currRow, int currCol, int mass) {
         super(currRow, currCol, mass);

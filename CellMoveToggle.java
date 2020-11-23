@@ -12,10 +12,10 @@ public class CellMoveToggle extends CellMoveUp {
     public boolean toggled;
 
     //MAGIC NUMBER
-    private static String CELL_MOVE_TOGG_STRING_ON = "T";
-    private static String CELL_MOVE_TOGG_STRING_OFF = "t";
-    private static int CELL_MOVE_TOGG_UPPER_BOUND = 5;
-    private static int CELL_MOVE_TOGG_LOWER_BOUND = 2;
+    private static final String CELL_MOVE_TOGG_STRING_ON = "T";
+    private static final String CELL_MOVE_TOGG_STRING_OFF = "t";
+    private static final int CELL_MOVE_TOGG_UPPER_BOUND = 5;
+    private static final int CELL_MOVE_TOGG_LOWER_BOUND = 2;
 
     public CellMoveToggle(int currRow, int currCol, int mass) {
         super(currRow, currCol, mass);
