@@ -2,12 +2,19 @@
  * NAME: Steven Khaw
  * ID: A16669117
  * EMAIL: skhaw@ucsd.edu
+ * 
+ * This file contains the Cell class for PA7. It is an abstract class. It 
+ * contains a simple constructor method, copier, getter, and a method to deem
+ * this cell as "dead". It's main purpose is to be inherited by other objects. 
  */
 
 import java.util.List;
 
 /**
- * 
+ * The Cell class is an abstract class that all other objects will extend from.
+ * This class is composed of a constructor, copy, get, and a method that will 
+ * label this cell as dead. There are 3 instance variables: currRow, currCol, 
+ * both for location of the Cell in a 2D array; and mass.
  */
 public abstract class Cell {
 
@@ -17,10 +24,11 @@ public abstract class Cell {
     public int mass;
     
     /**
+     * Construct a Cell object and sets each instance variable to its inputs
      * 
-     * @param currRow
-     * @param currCol
-     * @param mass
+     * @param currRow int value for current row location 
+     * @param currCol int value for current column location
+     * @param mass int value for mass 
      */
     public Cell(int currRow, int currCol, int mass) {
         
@@ -43,8 +51,10 @@ public abstract class Cell {
     }
 
     /**
+     * Copier method that copies instance variables from one Cell object to 
+     * current Cell object
      * 
-     * @param otherCell
+     * @param otherCell Cell object being copied
      */
     public Cell(Cell otherCell) {
 
@@ -67,7 +77,7 @@ public abstract class Cell {
     }
 
     /**
-     * 
+     * Sets instance variables as -1, deems Cell object as dead;
      */
     public void apoptosis() {
         this.currRow = -1;
@@ -76,33 +86,38 @@ public abstract class Cell {
     }
 
     /**
+     * Returns instance variable currRow
      * 
-     * @return
+     * @return int value of currRow instance variable
      */
     public int getCurrRow() {
         return this.currRow;
     }
 
     /**
+     * Returns instance variable currCol
      * 
-     * @return
+     * @return int value of currCol instance variable
      */
     public int getCurrCol() {
         return this.currCol;
     }
 
     /**
+     * Returns instance variable mass
      * 
-     * @return
+     * @return int value of mass instance value
      */
     public int getMass() {
         return this.mass;
     }
 
     /**
+     * Abstract method that will be defined in other classes that inherit the 
+     * Cell object
      * 
-     * @param neighbors
-     * @return
+     * @param neighbors List of Cell objects being tested
+     * @return Dependant on other classes' inheritance
      */
     public abstract boolean checkApoptosis(List<Cell> neighbors);
 }

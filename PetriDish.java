@@ -2,6 +2,13 @@
  * NAME: Steven Khaw
  * ID: A16669117
  * EMAIL: skhaw@ucsd.edu
+ * 
+ * This file contains the PetriDish class for PA7. Its main function is to 
+ * populate an instance variable full of objects that are determined by the 
+ * given input. There is one instance variable for the 2D array of Cell objects
+ * being populated. There are 11 magic number constants; 8 of which are 
+ * Strings being tested for, 2 of which are used when printing out the 2D array
+ * and another for the bounds being tested.
  */
 
 /**
@@ -23,6 +30,7 @@ public class PetriDish {
     private static final String MOVE_CHILD_STRING = "CellMoveToggleChild";
     private static final String VERTICAL_BAR = "|";
     private static final String NEW_LINE = "\n";
+    private static final int BOARD_LENGTH_CHECK = 2;
 
     /**
      * 
@@ -42,11 +50,11 @@ public class PetriDish {
                 
                 //Split each element in board into two Strings
                 String[] boardContent = board[i][j].split(EMPTY_STRING); 
-                String boardCell = boardContent[0];
+                String boardCell = boardContent[0]; 
                 int boardMass = -1;
 
-                if (boardContent.length == 2) {
-                    boardMass = Integer.parseInt(boardContent[1]);
+                if (boardContent.length == BOARD_LENGTH_CHECK) {
+                    boardMass = Integer.parseInt(boardContent[1]); 
                 }                
 
                 switch (boardCell) {
@@ -79,7 +87,7 @@ public class PetriDish {
     
     /**
      * 
-     * @return 
+     * @return String output of class's instance variable
      */
     public String toString() {
         
@@ -95,9 +103,11 @@ public class PetriDish {
         //MAGIC NUMBER  
         final String HORIZONTAL_BARS = hb.toString();
 
+        //Creation of StringBuilder used to append to
         StringBuilder sb = new StringBuilder();
         sb.append(HORIZONTAL_BARS);
 
+        //Iterates through and appends every value followed by a vertical bar
         for(int i = 0; i < dish.length; i++) {
             sb.append(VERTICAL_BAR);
 
@@ -112,5 +122,13 @@ public class PetriDish {
         }
 
         return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        String[][] petri = new String[][]{ {"CellMoveUp 0", "CellMoveToggle 1", "CellMoveToggleChild 2", "null"},
+{"CellMoveDiagonal 3", "CellDivide 4", "CellMoveToggle 5", "null"} };
+
+        PetriDish pd = new PetriDish(petri);
+        System.out.println(pd.toString());
     }
 }
