@@ -12,7 +12,9 @@
  */
 
 /**
- * 
+ * This class's main purpose is to populate a 2D array of objects as well as 
+ * be able to print this array out. There is one instance variable for the 
+ * 2D array of Cells.
  */
 public class PetriDish {
     
@@ -33,8 +35,10 @@ public class PetriDish {
     private static final int BOARD_LENGTH_CHECK = 2;
 
     /**
+     * Populates instance variable dependant on input of 2D array of Strings.
+     * Contains two constants for the input board's row and column count.
      * 
-     * @param board
+     * @param board String 2D array being tested
      */
     public PetriDish(String[][] board) {
 
@@ -45,11 +49,12 @@ public class PetriDish {
 
         this.dish = new Cell[VERTICAL_SIZE][HORIZONTAL_SIZE];
 
+        //Iterate through 2D array input
         for (int i = 0; i < VERTICAL_SIZE; i++) {
             for (int j = 0; j < HORIZONTAL_SIZE; j++) {
                 
                 //Split each element in board into two Strings
-                String[] boardContent = board[i][j].split(EMPTY_STRING); 
+                String[] boardContent = board[i][j].split(EMPTY_STRING);
                 String boardCell = boardContent[0]; 
                 int boardMass = -1;
 
@@ -86,12 +91,14 @@ public class PetriDish {
     }
     
     /**
+     * Prints out string representation of each object from the instance 
+     * variable
      * 
-     * @return String output of class's instance variable
+     * @return String output of class's instance variable's string 
      */
     public String toString() {
         
-        //Creation of HORIZONTAL_BARS magic number
+        //--START-- Creation of HORIZONTAL_BARS magic number
         StringBuilder hb = new StringBuilder();
 
         for (int x = 0; x < dish[0].length; x++) {
@@ -99,6 +106,7 @@ public class PetriDish {
         }
 
         hb.append("-\n");
+        //--END-- Creation of HORIZONTAL_BARS magic number
 
         //MAGIC NUMBER  
         final String HORIZONTAL_BARS = hb.toString();
@@ -108,10 +116,10 @@ public class PetriDish {
         sb.append(HORIZONTAL_BARS);
 
         //Iterates through and appends every value followed by a vertical bar
-        for(int i = 0; i < dish.length; i++) {
+        for (int i = 0; i < dish.length; i++) {
             sb.append(VERTICAL_BAR);
 
-            for(int j = 0; j < dish[0].length; j++) {
+            for (int j = 0; j < dish[0].length; j++) {
                 sb.append(dish[i][j] == null ? EMPTY_STRING : 
                         dish[i][j].toString());
                 sb.append(VERTICAL_BAR);
@@ -122,13 +130,5 @@ public class PetriDish {
         }
 
         return sb.toString();
-    }
-
-    public static void main(String[] args) {
-        String[][] petri = new String[][]{ {"CellMoveUp 0", "CellMoveToggle 1", "CellMoveToggleChild 2", "null"},
-{"CellMoveDiagonal 3", "CellDivide 4", "CellMoveToggle 5", "null"} };
-
-        PetriDish pd = new PetriDish(petri);
-        System.out.println(pd.toString());
     }
 }
