@@ -15,8 +15,9 @@ import java.util.List;
  * This class is composed of a constructor, copy, get, and a method that will 
  * label this cell as dead. There are 3 instance variables: currRow, currCol, 
  * both for location of the Cell in a 2D array; and mass.
+ * implements Comparable<Cell>
  */
-public abstract class Cell implements Comparable<Cell> {
+public abstract class Cell {
 
     //INSTANCE VARIABLES
     public int currRow;
@@ -121,7 +122,7 @@ public abstract class Cell implements Comparable<Cell> {
      */
     public abstract boolean checkApoptosis(List<Cell> neighbors);
 
-    public int compareTo(Cell otherCell) {
+    /* public int compareTo(Cell otherCell) {
         if (this.mass > otherCell.mass) {
             return 1;
         } else if (this.mass < otherCell.mass) {
@@ -132,4 +133,4 @@ public abstract class Cell implements Comparable<Cell> {
     }
 
     public abstract Cell newCellCopy();
-}
+} */
