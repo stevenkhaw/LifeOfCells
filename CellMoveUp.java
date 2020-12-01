@@ -9,6 +9,8 @@
  */
 
 import java.util.List;
+
+import jdk.internal.jshell.tool.resources.l10n;
  
 /**
  * This class inherits from Cell. This child class has its own string 
@@ -16,7 +18,7 @@ import java.util.List;
  * variables but 2 magic number constants; one for the string representation of
  * this object and another for the bound being tested.
  */
-public class CellMoveUp extends Cell {
+public class CellMoveUp extends Cell implements Movable {
     
     //MAGIC NUMBERS
     private static final String CELL_MOVEUP_STRING = "^";
@@ -65,5 +67,25 @@ public class CellMoveUp extends Cell {
         }
 
         return false;
+    }
+
+    public Cell newCellCopy() {
+        return new CellMoveUp(this);
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public int[] getMove() {
+        int[] newPosition = new int[] {this.currRow -1, this.currCol};
+
+        return newPosition;
+    }
+
+    public static void main(String[] args) {
+        Cell yes = new CellMoveUp(5,5,5);
+        int[] newPosition = new int[] {yes.currRow -1, yes.currCol};
+        System.out.println(newPosition[0] + " " + newPosition[1]);
     }
 }

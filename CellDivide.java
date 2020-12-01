@@ -17,7 +17,7 @@ import java.util.List;
  * for the string representation of this object and another for the bounds 
  * being tested.
  */
-public class CellDivide extends Cell{
+public class CellDivide extends Cell implements Divisible {
 
     //INSTANCE VARIABLE
     public int direction;
@@ -71,5 +71,21 @@ public class CellDivide extends Cell{
         }
 
         return false;
+    }
+
+    public Cell newCellCopy() {
+        return new CellDivide(this);
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public int[] getDivisible() {
+        int[] newDivision = new int[2];
+        newDivision[0] = this.currRow;
+        newDivision[1] = this.currCol;
+
+        return newDivision;
     }
 }

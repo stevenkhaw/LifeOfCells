@@ -73,4 +73,8 @@ public class CellMoveToggleChild extends CellMoveToggle {
 
         return false;
     }
+
+    public Cell newCellCopy() {
+        return new CellMoveToggleChild(this);
+    }
 }

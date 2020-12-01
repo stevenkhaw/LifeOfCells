@@ -81,4 +81,8 @@ public class CellMoveDiagonal extends CellMoveUp {
 
         return false;
     }
+
+    public Cell newCellCopy() {
+        return new CellMoveDiagonal(this);
+    }
 }
