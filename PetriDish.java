@@ -12,6 +12,7 @@
  */
 
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This class's main purpose is to populate a 2D array of objects as well as 
@@ -134,5 +135,44 @@ public class PetriDish {
         }
 
         return sb.toString();
+    }
+
+    public List<Cell> getNeighborsOf(int row, int col) {
+        List<Cell> neighboringList = new ArrayList<Cell>();
+
+        int rowStart = row - 1;
+        int colStart = col - 1;
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (dish[rowStart + i][colStart + j] == null) {
+                    return null;
+                }
+                if (i != 1 & j != 1) {
+                    neighboringList.add(dish[rowStart + i][colStart + j]);
+                }
+            }
+        }
+
+        return neighboringList;
+    }
+    public void move() {
+        
+    }
+
+    public void divide() {
+
+    }
+
+    public void update() {
+
+    }
+
+    public void iterate() {
+
+    }
+
+    public void simulate() {
+
     }
 }
