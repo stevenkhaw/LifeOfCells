@@ -122,16 +122,15 @@ public abstract class Cell {
      */
     public abstract boolean checkApoptosis(List<Cell> neighbors);
 
-    /* public int compareTo(Cell otherCell) {
-        if (this.mass > otherCell.mass) {
-            return 1;
-        } else if (this.mass < otherCell.mass) {
-            return -1;
-        } else {
-            return 0;
-        }
+    /**
+     * 
+     * @param otherCell
+     * @return
+     */
+    public int compareTo(Cell otherCell) {
+        return this.mass - otherCell.mass;
     }
 
     public abstract Cell newCellCopy();
-    */
+   
 } 
