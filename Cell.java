@@ -113,6 +113,15 @@ public abstract class Cell implements Comparable<Cell> {
     }
 
     /**
+     * 
+     * @param otherCell
+     * @return
+     */
+    public int compareTo(Cell otherCell) {
+        return this.mass - otherCell.mass;
+    }
+
+    /**
      * Abstract method that will be defined in other classes that inherit the 
      * Cell object
      * 
@@ -123,13 +132,7 @@ public abstract class Cell implements Comparable<Cell> {
 
     /**
      * 
-     * @param otherCell
      * @return
      */
-    public int compareTo(Cell otherCell) {
-        return this.mass - otherCell.mass;
-    }
-
     public abstract Cell newCellCopy();
-   
 } 

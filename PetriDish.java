@@ -11,6 +11,8 @@
  * and another for the bounds being tested.
  */
 
+import java.util.List;
+
 /**
  * This class's main purpose is to populate a 2D array of objects as well as 
  * be able to print this array out. There is one instance variable for the 
@@ -20,6 +22,8 @@ public class PetriDish {
     
     //INSTANCE VARIABLE
     public Cell[][] dish;
+    public List<Movable> movables;
+    public List<Divisible>divisbles;
 
     //MAGIC NUMBERS
     private static final String EMPTY_STRING = " ";

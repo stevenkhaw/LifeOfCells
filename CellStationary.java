@@ -69,6 +69,9 @@ public class CellStationary extends Cell {
         return false;
     }
 
+    /**
+     * 
+     */
     public Cell newCellCopy() {
         return new CellStationary(this);
     }

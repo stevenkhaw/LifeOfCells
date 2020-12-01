@@ -73,6 +73,9 @@ public class CellDivide extends Cell implements Divisible {
         return false;
     }
 
+    /**
+     * 
+     */
     public Cell newCellCopy() {
         return new CellDivide(this);
     }
@@ -81,11 +84,23 @@ public class CellDivide extends Cell implements Divisible {
      * 
      * @return
      */
-    public int[] getDivisible() {
+    public int[] getDivision() {
         int[] newDivision = new int[2];
+
         newDivision[0] = this.currRow;
         newDivision[1] = this.currCol;
 
+        switch(this.direction) {
+            case (0):
+                newDivision[0] = this.currRow + 1;
+            case (1):
+                newDivision[0] = this.currRow - 1;
+            case (2):
+                newDivision[1] = this.currCol - 1;
+            case (3):
+                newDivision[0] = this.currRow - 1;
+        }
+        
         return newDivision;
     }
 }

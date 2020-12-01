@@ -82,7 +82,35 @@ public class CellMoveDiagonal extends CellMoveUp {
         return false;
     }
 
+    /**
+     * 
+     */
     public Cell newCellCopy() {
         return new CellMoveDiagonal(this);
+    }
+
+    /**
+     * 
+     */
+    public int[] getMove() {
+        int[] newPosition = new int[2];
+
+        if (this.orientedRight) {
+            newPosition[0] = this.currRow - 1;
+            newPosition[1] = this.currCol + 1;
+        } else {
+            newPosition[0] = this.currRow + 1;
+            newPosition[1] = this.currCol - 1;
+        }
+
+        this.diagonalMoves++;
+
+        if (this.diagonalMoves % 4 == 0) {
+            if (this.orientedRight) {
+                this.orientedRight = false;
+            } else {
+                this.orientedRight = true;
+            }
+        }
     }
 }

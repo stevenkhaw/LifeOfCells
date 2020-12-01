@@ -1,3 +1,3 @@
 public interface Divisible {
-    public abstract int[] getMove();
+    public abstract int[] getDivision();
 }

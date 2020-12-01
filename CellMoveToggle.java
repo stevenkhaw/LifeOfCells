@@ -79,7 +79,26 @@ public class CellMoveToggle extends CellMoveUp {
         return false;
     }
 
+    /**
+     * 
+     */
     public Cell newCellCopy() {
         return new CellMoveToggle(this);
+    }
+    
+    public int[] getMove() {
+        int[] newPosition = new int[2];
+
+        if (this.toggled) {
+            newPosition[0] = this.currRow - 1;
+            newPosition[1] = this.currCol;
+            this.toggled = false;
+        } else {
+            newPosition[0] = this.currRow;
+            newPosition[1] = this.currCol;
+            this.toggled = true;
+        }
+
+        return newPosition;
     }
 }
