@@ -127,10 +127,10 @@ public abstract class Cell {
      * @param otherCell
      * @return
      */
-    public int compareTo(Cell otherCell) {
+   /*  public int compareTo(Cell otherCell) {
         return this.mass - otherCell.mass;
     }
 
-    public abstract Cell newCellCopy();
+    public abstract Cell newCellCopy(); */
    
 } 
