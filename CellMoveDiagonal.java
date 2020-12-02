@@ -112,5 +112,7 @@ public class CellMoveDiagonal extends CellMoveUp {
                 this.orientedRight = true;
             }
         }
+
+        return newPosition;
     }
 }

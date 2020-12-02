@@ -38,6 +38,7 @@ public class PetriDish {
     private static final String VERTICAL_BAR = "|";
     private static final String NEW_LINE = "\n";
     private static final int BOARD_LENGTH_CHECK = 2;
+    private static final int ROW_COL_BOUND = 3;
 
     /**
      * Populates instance variable dependant on input of 2D array of Strings.
@@ -140,24 +141,49 @@ public class PetriDish {
     public List<Cell> getNeighborsOf(int row, int col) {
         List<Cell> neighboringList = new ArrayList<Cell>();
 
+        //Check row and col valididity
+        if (wrapRow(row) != row || wrapCol(col) != col) {
+            return null;
+        }
+
         int rowStart = row - 1;
         int colStart = col - 1;
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (dish[rowStart + i][colStart + j] == null) {
-                    return null;                        
+        for (int i = 0; i < ROW_COL_BOUND; i++) {
+            for (int j = 0; j < ROW_COL_BOUND; j++) {
+                if (i != 1 && j != 1) {
+                    continue;
                 }
-                if (i != 1 & j != 1) {
-                    neighboringList.add(dish[rowStart + i][colStart + j]);
+
+                if (dish[wrapRow(rowStart + i)][wrapCol(colStart + j)]
+                                                                     == null) {
+                    neighboringList.add(null);                  
+                } else {
+                    neighboringList.add(
+                        dish[wrapRow(rowStart + i)][wrapCol(colStart + j)]);
                 }
             }
         }
 
         return neighboringList;
     }
+
     public void move() {
-        
+        for (int i = 0; i < dish.length; i++) {
+            for (int j = 0; j < dish[0].length; j++) {
+                if (dish[i][j] instanceof Movable) {
+                    Cell curCell = dish[i][j];
+                    int[] curMove = ((Movable) dish[i][j]).getMove();
+
+                    curMove[0] = wrapRow(curMove[0]);
+                    curMove[1] = wrapCol(curMove[1]);
+
+                    if (dish[curMove[0]][curMove[1]] != null) {
+                        
+                    }
+                }
+            }
+        }
     }
 
     public void divide() {
@@ -174,5 +200,37 @@ public class PetriDish {
 
     public void simulate() {
 
+    }
+
+    private int wrapRow(int row) {
+        int newRow = row;
+        
+        if (row < 0) {
+            newRow = dish.length + row;
+        } else if (row > dish.length - 1) {
+            newRow = row - dish.length;
+        }
+
+        return newRow;
+    }
+
+    private int wrapCol(int col) {
+        int newCol = col;
+
+        if (col < 0) {
+            newCol = dish[0].length + col;
+        } else if (col > dish[0].length - 1) {
+            newCol = col - dish[0].length;
+        }
+        
+        return newCol;
+    }
+
+    public static void main(String[] args) {
+        String[][] petri = new String[][]{ {"CellMoveUp 0", "CellMoveToggle 1", "CellMoveToggleChild 2", "null"},
+{"CellMoveDiagonal 3", "CellDivide 4", "CellMoveToggle 5", "null"} };
+
+        PetriDish yes = new PetriDish(petri);
+        System.out.println(yes.toString());
     }
 } 
