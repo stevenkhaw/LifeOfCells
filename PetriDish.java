@@ -146,7 +146,7 @@ public class PetriDish {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (dish[rowStart + i][colStart + j] == null) {
-                    return null;
+                    return null;                        
                 }
                 if (i != 1 & j != 1) {
                     neighboringList.add(dish[rowStart + i][colStart + j]);
@@ -175,4 +175,4 @@ public class PetriDish {
     public void simulate() {
 
     }
-}
+} 
