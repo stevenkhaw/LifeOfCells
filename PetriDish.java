@@ -40,6 +40,12 @@ public class PetriDish {
     private static final String NEW_LINE = "\n";
     private static final int BOARD_LENGTH_CHECK = 2;
     private static final int ROW_COL_BOUND = 3;
+    private static final String EXIT_KEY = "exit";
+    private static final String MOVE_KEY = "move";
+    private static final String DIVIDE_KEY = "divide";
+    private static final String UPDATE_KEY = "update";
+    private static final String ITERATE_KEY = "iterate";
+    private static final String INVALID_MESSAGE = "invalid";
 
     /**
      * Populates instance variable dependant on input of 2D array of Strings.
@@ -413,14 +419,6 @@ public class PetriDish {
         divide();
         update();
     }
-
-    private static final String EXIT_KEY = "exit";
-    private static final String MOVE_KEY = "move";
-    private static final String DIVIDE_KEY = "divide";
-    private static final String UPDATE_KEY = "update";
-    private static final String ITERATE_KEY = "iterate";
-    private static final String INVALID_MESSAGE = "invalid";
-
     
     public void simulate() {
         Scanner sc = new Scanner(System.in);
@@ -495,22 +493,5 @@ public class PetriDish {
         }
         
         return newCol;
-    }
-
-    public static void main(String[] args) {
-        String[][] petri = new String[][]{ 
-            {"null", "null", "null", "null", "null"},
-            {"null", "CellStationary 2", "CellDivide 5", "CellStationary 11", "null"}, 
-            {"null", "CellMoveDiagonal 4", "CellMoveToggle 3", "CellMoveToggle 10", "CellStationary 4"}, 
-            {"null", "null", "CellDivide 2", "CellMoveUp 4", "null"}
-        };
-
-        PetriDish yes = new PetriDish(petri);
-        yes.move();
-        System.out.println(yes);
-        yes.divide();
-        System.out.println(yes);
-        yes.update();
-        System.out.println(yes);
     }
 } 
