@@ -24,7 +24,7 @@ public class PetriDish {
     //INSTANCE VARIABLE
     public Cell[][] dish;
     public List<Movable> movables;
-    public List<Divisible>divisbles;
+    public List<Divisible> divisibles;
 
     //MAGIC NUMBERS
     private static final String EMPTY_STRING = " ";
@@ -52,8 +52,10 @@ public class PetriDish {
         final int VERTICAL_SIZE = board.length;
         final int HORIZONTAL_SIZE = board[0].length;
 
-
+        //Initializes instance variables
         this.dish = new Cell[VERTICAL_SIZE][HORIZONTAL_SIZE];
+        this.movables = new ArrayList<Movable>();
+        this.divisibles = new ArrayList<Divisible>();
 
         //Iterate through 2D array input
         for (int i = 0; i < VERTICAL_SIZE; i++) {
@@ -91,6 +93,21 @@ public class PetriDish {
                         this.dish[i][j] = new 
                                 CellMoveToggleChild(i,j,boardMass);
                         break;
+                }
+            }
+        }
+
+        //Checks for cells with Movable and Divisible interfaces
+        for (int x = 0; x < dish.length; x++) {
+            for (int y = 0; y < dish[0].length; y++) {
+                //Adds Movable cells to instance variable
+                if (dish[x][y] instanceof Movable) {
+                    movables.add((Movable) dish[x][y]);
+                }
+
+                //Adds Divisible cells to instance variable
+                if (dish[x][y] instanceof Divisible) {
+                    divisibles.add((Divisible) dish[x][y]);
                 }
             }
         }
@@ -183,7 +200,7 @@ public class PetriDish {
                     int newMoveRow = wrapRow(newMoveLoc[0]);
                     int newMoveCol = wrapCol(newMoveLoc[1]);
 
-                    //Runs if new locations has Movable cell
+                    //Runs if new location has Movable cell
                     if (dish[newMoveRow][newMoveCol] instanceof Movable) {
                         
                         //Runs if new Movable cell has more mass
@@ -275,8 +292,45 @@ public class PetriDish {
                     int newDivRow = wrapRow(newDivLoc[0]);
                     int newDivCol = wrapCol(newDivLoc[1]);
 
+                    //Runs if new location is empty
                     if (dish[newDivRow][newDivCol] == null) {
+
+                        //Divides new cell copy onto new location
+                        dish[newDivRow][newDivCol] = 
+                                    new CellDivide((CellDivide) dish[i][j]);
+
+                        //Updates the location instance variables
+                        dish[newDivRow][newDivCol].currRow = newDivRow;
+                        dish[newDivRow][newDivCol].currCol = newDivCol;
+
+                    //Runs if new location has Divisible cell
+                    } else if (dish[newDivRow][newDivCol] 
+                                                        instanceof Divisible){
                         
+                        //Runs if new Divisible cell has greater mass
+                        if (dish[newDivRow][newDivCol].mass < dish[i][j].mass){
+                            
+                            //Kills lighter Divisible cell
+                            dish[newDivRow][newDivCol].apoptosis();
+
+                            //Replaces dead cell with new cell divided copy
+                            dish[newDivRow][newDivCol] = 
+                                    new CellDivide((CellDivide) dish[i][j]);
+
+                            //Updates the location instance variables
+                            dish[newDivRow][newDivCol].currRow = newDivRow;
+                            dish[newDivRow][newDivCol].currCol = newDivCol;
+                    
+                        //Runs if Divisible cells have same mass
+                        } else if (dish[newDivRow][newDivCol].mass == 
+                                                            dish[i][j].mass){
+                            
+                            //All cells in that location die
+                            dish[newDivRow][newDivCol].apoptosis();
+
+                            //Empties cell
+                            dish[newDivRow][newDivCol] = null;
+                        }
                     }
                 }
             }
@@ -285,10 +339,47 @@ public class PetriDish {
 
     public void update() {
 
+        //Iterates through whole dish
+        for (int i = 0; i < dish.length; i++) {
+            for (int j = 0; j < dish[0].length; j++) {
+
+                //Runs if dish element is not null/empty
+                if (dish[i][j] != null) {
+
+                    //Runs if dish is deemed dead dependant on neighbors
+                    if (dish[i][j].checkApoptosis(getNeighborsOf(i,j))) {
+
+                        //Deems cell as dead
+                        dish[i][j].apoptosis();
+
+                        //Empties cell location
+                        dish[i][j] = null;
+                    }
+                
+                //Runs if dish element is null/empty
+                } else {
+                    List<Cell> currNeighbors = getNeighborsOf(i,j);
+
+                    if (currNeighbors.size() == 2 || 
+                                                currNeighbors.size() == 3) {
+                        
+                        //Creates new cell copy of the first neighbor
+                        dish[i][j] = currNeighbors.get(0).newCellCopy();
+
+                        //Updates the location instance variables
+                        dish[i][j].currRow = i;
+                        dish[i][j].currCol = j;
+                    }
+                }
+
+            }
+        }
     }
 
     public void iterate() {
-
+        move();
+        divide();
+        update();
     }
 
     public void simulate() {
@@ -336,8 +427,12 @@ public class PetriDish {
     }
 
     public static void main(String[] args) {
-        String[][] petri = new String[][]{ {"CellMoveUp 0", "CellMoveToggle 1", "CellMoveToggleChild 2", "null"},
-{"CellMoveDiagonal 3", "CellDivide 4", "CellMoveToggle 5", "null"} };
+        String[][] petri = new String[][]{ 
+            {"null", "null", "null", "null", "null"},
+            {"null", "CellStationary 2", "CellDivide 5", "CellStationary 11", "null"}, 
+            {"null", "CellMoveDiagonal 4", "CellMoveToggle 3", "CellMoveToggle 10", "CellStationary 4"}, 
+            {"null", "null", "CellDivide 2", "CellMoveUp", "null"}
+        };
 
         PetriDish yes = new PetriDish(petri);
         System.out.println(yes.toString());

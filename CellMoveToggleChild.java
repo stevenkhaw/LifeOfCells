@@ -34,7 +34,6 @@ public class CellMoveToggleChild extends CellMoveToggle {
     public CellMoveToggleChild(int currRow, int currCol, int mass) {
         super(currRow, currCol, mass);
         numAlive++;
-        
     }
 
     /**
