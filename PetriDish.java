@@ -382,9 +382,9 @@ public class PetriDish {
         update();
     }
 
-    public void simulate() {
+    /* public void simulate() {
 
-    }
+    } */
 
     /**
      * Helper method that is used to wrap a row index. If no wrapping is 
@@ -426,7 +426,7 @@ public class PetriDish {
         return newCol;
     }
 
-    public static void main(String[] args) {
+    /* public static void main(String[] args) {
         String[][] petri = new String[][]{ 
             {"null", "null", "null", "null", "null"},
             {"null", "CellStationary 2", "CellDivide 5", "CellStationary 11", "null"}, 
@@ -436,5 +436,5 @@ public class PetriDish {
 
         PetriDish yes = new PetriDish(petri);
         System.out.println(yes.toString());
-    }
+    } */
 } 
