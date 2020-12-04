@@ -169,17 +169,91 @@ public class PetriDish {
     }
 
     public void move() {
+
+        //Iterates through every element in dish
         for (int i = 0; i < dish.length; i++) {
             for (int j = 0; j < dish[0].length; j++) {
+
+                //Runs if element has a Movable interface 
                 if (dish[i][j] instanceof Movable) {
-                    Cell curCell = dish[i][j];
-                    int[] curMove = ((Movable) dish[i][j]).getMove();
+                    
+                    //Gets new location of Movable cell
+                    int[] newMoveLoc = ((Movable) dish[i][j]).getMove();
 
-                    curMove[0] = wrapRow(curMove[0]);
-                    curMove[1] = wrapCol(curMove[1]);
+                    //New row and column after locations are wrapped
+                    int newMoveRow = wrapRow(newMoveLoc[0]);
+                    int newMoveCol = wrapCol(newMoveLoc[1]);
 
-                    if (dish[curMove[0]][curMove[1]] != null) {
+                    //Runs if new locations has Movable cell
+                    if (dish[newMoveRow][newMoveCol] instanceof Movable) {
                         
+                        //Runs if new Movable cell has more mass
+                        if (dish[newMoveRow][newMoveCol].mass < 
+                                                            dish[i][j].mass) {
+                            
+                            //Kills lighter Movable cell
+                            dish[newMoveRow][newMoveCol].apoptosis();
+                            
+                            //Replaces dead cell
+                            dish[newMoveRow][newMoveCol] = dish[i][j];
+
+                            //Updates the location instance variables 
+                            dish[newMoveRow][newMoveCol].currRow = newMoveRow;
+                            dish[newMoveRow][newMoveCol].currCol = newMoveCol;
+
+                            //Removes Movable cell from previous location
+                            dish[i][j] = null;
+
+                        //Runs if new Movable cell has less mass
+                        } else if (dish[newMoveRow][newMoveCol].mass > 
+                                                            dish[i][j].mass) {
+                            
+                            //Kills lighter Movable cell
+                            dish[i][j].apoptosis();
+
+                            //Removes dead cell from dish
+                            dish[i][j] = null;
+                        
+                        //Runs if cells are same mass
+                        } else {
+                            
+                            //Kills both cells
+                            dish[i][j].apoptosis();
+                            dish[newMoveRow][newMoveCol].apoptosis();
+
+                            //Removes dead cells from dish
+                            dish[i][j] = null;
+                            dish[newMoveRow][newMoveCol] = null;
+                        }
+
+                    //Runs if new location is empty
+                    } else if (dish[newMoveRow][newMoveCol] == null) {
+
+                        //Replaces null with Movable cell
+                        dish[newMoveRow][newMoveCol] = dish[i][j];
+
+                        //Updates the location instance variables 
+                        dish[newMoveRow][newMoveCol].currRow = newMoveRow;
+                        dish[newMoveRow][newMoveCol].currCol = newMoveCol;
+
+                        //Removes Movable cell from previous location
+                        dish[i][j] = null;
+
+                    //Runs if new location has non-Movable cell
+                    } else {
+
+                        //Kills non-Movable cell 
+                        dish[newMoveRow][newMoveCol].apoptosis();
+
+                        //Replaces non-Movable cell with Movable cell
+                        dish[newMoveRow][newMoveCol] = dish[i][j];
+
+                        //Updates the location instance variables 
+                        dish[newMoveRow][newMoveCol].currRow = newMoveRow;
+                        dish[newMoveRow][newMoveCol].currCol = newMoveCol;
+
+                        //Removes cell's previous location
+                        dish[i][j] = null;
                     }
                 }
             }
@@ -188,6 +262,20 @@ public class PetriDish {
 
     public void divide() {
 
+        //Iterates through every element in dish
+        for (int i = 0; i < dish.length; i++) {
+            for (int j = 0; j < dish[0].length; j++) {
+
+                //Runs if element has a Movable interface 
+                if (dish[i][j] instanceof Divisible) {
+                    
+                    int[] newDivLoc = ((Divisible) dish[i][j]).getDivision();
+
+                    int newDivRow = wrapRow(newDivLoc[0]);
+                    int newDivCol = wrapCol(newDivLoc[1]);
+                }
+            }
+        }
     }
 
     public void update() {
