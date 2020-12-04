@@ -151,14 +151,13 @@ public class PetriDish {
 
         for (int i = 0; i < ROW_COL_BOUND; i++) {
             for (int j = 0; j < ROW_COL_BOUND; j++) {
+
                 if (i != 1 && j != 1) {
                     continue;
                 }
 
                 if (dish[wrapRow(rowStart + i)][wrapCol(colStart + j)]
-                                                                     == null) {
-                    neighboringList.add(null);                  
-                } else {
+                                                                     != null) {
                     neighboringList.add(
                         dish[wrapRow(rowStart + i)][wrapCol(colStart + j)]);
                 }
@@ -266,13 +265,19 @@ public class PetriDish {
         for (int i = 0; i < dish.length; i++) {
             for (int j = 0; j < dish[0].length; j++) {
 
-                //Runs if element has a Movable interface 
+                //Runs if element has a Divisible interface 
                 if (dish[i][j] instanceof Divisible) {
-                    
+
+                    //Gets new location of Divisible cell
                     int[] newDivLoc = ((Divisible) dish[i][j]).getDivision();
 
+                    //New row and column after locations are wrapped
                     int newDivRow = wrapRow(newDivLoc[0]);
                     int newDivCol = wrapCol(newDivLoc[1]);
+
+                    if (dish[newDivRow][newDivCol] == null) {
+                        
+                    }
                 }
             }
         }
@@ -290,6 +295,14 @@ public class PetriDish {
 
     }
 
+    /**
+     * Helper method that is used to wrap a row index. If no wrapping is 
+     * needed, the number will not change. CAN ONLY BE USED WITH THE DISH 
+     * INSTANCE VARIABLE.
+     * 
+     * @param row
+     * @return int value of new wrapped/unwrapped row 
+     */
     private int wrapRow(int row) {
         int newRow = row;
         
@@ -302,6 +315,14 @@ public class PetriDish {
         return newRow;
     }
 
+    /**
+     * Helper method that is used to wrap a column index. If no wrapping is 
+     * needed, the number will not change. CAN ONLY BE USED WITH THE DISH 
+     * INSTANCE VARIABLE.
+     * 
+     * @param col
+     * @return int value of new wrapped/unwrapped column 
+     */
     private int wrapCol(int col) {
         int newCol = col;
 
