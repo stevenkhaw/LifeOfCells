@@ -13,6 +13,7 @@
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * This class's main purpose is to populate a 2D array of objects as well as 
@@ -156,6 +157,8 @@ public class PetriDish {
     }
 
     public List<Cell> getNeighborsOf(int row, int col) {
+
+        //Initializes return variable
         List<Cell> neighboringList = new ArrayList<Cell>();
 
         //Check row and col valididity
@@ -163,16 +166,20 @@ public class PetriDish {
             return null;
         }
 
+        //Sets start values for the for-loop below
         int rowStart = row - 1;
         int colStart = col - 1;
 
+        //Iterates a 3x3 area with the input row and col element in the middle
         for (int i = 0; i < ROW_COL_BOUND; i++) {
             for (int j = 0; j < ROW_COL_BOUND; j++) {
 
-                if (i != 1 && j != 1) {
+                //Skips checking the middle element
+                if (i == 1 && j == 1) {
                     continue;
                 }
 
+                //Runs if wrapped element is not null
                 if (dish[wrapRow(rowStart + i)][wrapCol(colStart + j)]
                                                                      != null) {
                     neighboringList.add(
@@ -339,39 +346,64 @@ public class PetriDish {
 
     public void update() {
 
-        //Iterates through whole dish
+        //Initializing deep copy variable
+        Cell[][] copyDish = new Cell[dish.length][dish[0].length];
+
+        //Creates deep copy of original
+        for (int s = 0; s < dish.length; s++) {
+            for (int t = 0; t < dish[0].length; t++) {
+                copyDish[s][t] = dish[s][t];
+            }
+        }
+
+        //Iterates through whole initial dish 
         for (int i = 0; i < dish.length; i++) {
             for (int j = 0; j < dish[0].length; j++) {
 
-                //Runs if dish element is not null/empty
+                //Runs if initial dish element is not null/empty
                 if (dish[i][j] != null) {
 
-                    //Runs if dish is deemed dead dependant on neighbors
+                    //Runs if initial dish is dead from neighbors
                     if (dish[i][j].checkApoptosis(getNeighborsOf(i,j))) {
 
-                        //Deems cell as dead
-                        dish[i][j].apoptosis();
+                        //Deems cell as dead for return
+                        copyDish[i][j].apoptosis();
 
-                        //Empties cell location
-                        dish[i][j] = null;
+                        //Empties cell location for return
+                        copyDish[i][j] = null;
                     }
-                
-                //Runs if dish element is null/empty
-                } else {
-                    List<Cell> currNeighbors = getNeighborsOf(i,j);
+                }
+            }
+        } 
+
+        //Iterates through whole initial dish 
+        for (int x = 0; x < dish.length; x++) {
+            for (int y = 0; y < dish[0].length; y++) {
+
+                //Runs if initial dish element is null/empty
+                if (dish[x][y] == null) {
+
+                    //Variable used to check amount of neighbors of element
+                    List<Cell> currNeighbors = getNeighborsOf(x,y);
 
                     if (currNeighbors.size() == 2 || 
                                                 currNeighbors.size() == 3) {
                         
-                        //Creates new cell copy of the first neighbor
-                        dish[i][j] = currNeighbors.get(0).newCellCopy();
+                        //Creates new copy of the first neighbor for return
+                        copyDish[x][y] = currNeighbors.get(0).newCellCopy();
 
-                        //Updates the location instance variables
-                        dish[i][j].currRow = i;
-                        dish[i][j].currCol = j;
+                        //Updates the location instance variables for return
+                        copyDish[x][y].currRow = x;
+                        copyDish[x][y].currCol = y;
                     }
                 }
+            }
+        }
 
+        //Iterates through and updates the dish 
+        for (int a = 0; a < dish.length; a++) {
+            for (int b = 0; b < dish[0].length; b++) {
+                dish[a][b] = copyDish[a][b];
             }
         }
     }
@@ -382,9 +414,48 @@ public class PetriDish {
         update();
     }
 
-    /* public void simulate() {
+    private static final String EXIT_KEY = "exit";
+    private static final String MOVE_KEY = "move";
+    private static final String DIVIDE_KEY = "divide";
+    private static final String UPDATE_KEY = "update";
+    private static final String ITERATE_KEY = "iterate";
+    private static final String INVALID_MESSAGE = "invalid";
 
-    } */
+    
+    public void simulate() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(this);
+
+        while(sc.hasNextLine()){
+            String line = sc.nextLine();
+
+            if(line.equals(EXIT_KEY)){
+                break;
+            }
+
+            switch(line){
+                case MOVE_KEY:
+                    move();
+                    break;
+                case DIVIDE_KEY:
+                    divide();
+                    break;
+                case UPDATE_KEY:
+                    update();
+                    break;
+                case ITERATE_KEY:
+                    iterate();
+                    break;
+                default:
+                    System.out.println(INVALID_MESSAGE);
+                    break;
+            }
+
+            System.out.println(this);
+        }
+
+        sc.close();
+    }
 
     /**
      * Helper method that is used to wrap a row index. If no wrapping is 
@@ -426,15 +497,20 @@ public class PetriDish {
         return newCol;
     }
 
-    /* public static void main(String[] args) {
+    public static void main(String[] args) {
         String[][] petri = new String[][]{ 
             {"null", "null", "null", "null", "null"},
             {"null", "CellStationary 2", "CellDivide 5", "CellStationary 11", "null"}, 
             {"null", "CellMoveDiagonal 4", "CellMoveToggle 3", "CellMoveToggle 10", "CellStationary 4"}, 
-            {"null", "null", "CellDivide 2", "CellMoveUp", "null"}
+            {"null", "null", "CellDivide 2", "CellMoveUp 4", "null"}
         };
 
         PetriDish yes = new PetriDish(petri);
-        System.out.println(yes.toString());
-    } */
+        yes.move();
+        System.out.println(yes);
+        yes.divide();
+        System.out.println(yes);
+        yes.update();
+        System.out.println(yes);
+    }
 } 

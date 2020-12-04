@@ -93,12 +93,16 @@ public class CellDivide extends Cell implements Divisible {
         switch(this.direction) {
             case (0):
                 newDivision[0] = this.currRow + 1;
+                break;
             case (1):
                 newDivision[0] = this.currRow - 1;
+                break;
             case (2):
                 newDivision[1] = this.currCol - 1;
+                break;
             case (3):
                 newDivision[0] = this.currRow - 1;
+                break;
         }
         
         return newDivision;
