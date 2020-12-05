@@ -5,10 +5,12 @@
  * 
  * This file contains the PetriDish class for PA7. Its main function is to 
  * populate an instance variable full of objects that are determined by the 
- * given input. There is one instance variable for the 2D array of Cell objects
- * being populated. There are 11 magic number constants; 8 of which are 
- * Strings being tested for, 2 of which are used when printing out the 2D array
- * and another for the bounds being tested.
+ * given input as well as move, divide, and update them. There is also a 
+ * simulate method that lets the user interface the game and call certain 
+ * methods to maniupate the game board/dish. There is one instance 
+ * variable for the 2D array of Cell objects being populated and another 2 
+ * for the list of Moveable and Divisible interface cells. There are 17 
+ * magic number constants. 
  */
 
 import java.util.List;
