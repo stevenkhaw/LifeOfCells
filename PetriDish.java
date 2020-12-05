@@ -73,6 +73,7 @@ public class PetriDish {
                 String boardCell = boardContent[0]; 
                 int boardMass = -1;
 
+                //If split array contains 2 elements as expected
                 if (boardContent.length == BOARD_LENGTH_CHECK) {
                     boardMass = Integer.parseInt(boardContent[1]); 
                 }                
@@ -162,6 +163,14 @@ public class PetriDish {
         return sb.toString();
     }
 
+    /**
+     * Gets the cells neighboring the input row, col. Returns list of cells
+     * surrounding tested cell in order of NW, N, NE, W, E, SW, S, SE.
+     * 
+     * @param row int value representing row location being tested
+     * @param col int value representing column location being tested
+     * @return ArrayList of Cell objects surrouding tested location
+     */
     public List<Cell> getNeighborsOf(int row, int col) {
 
         //Initializes return variable
@@ -197,6 +206,10 @@ public class PetriDish {
         return neighboringList;
     }
 
+    /**
+     * Moves all cell objects that have the Movable interface. Cell moves
+     * dependant on mass, and status of element the new cell is moving to. 
+     */
     public void move() {
 
         //Iterates through every element in dish
@@ -301,6 +314,11 @@ public class PetriDish {
         }
     }
 
+    /**
+     * Divides all cells that have a Divisible interface. Divides cells 
+     * dependant on factors like mass and status of the location where 
+     * the new cell is moving to.
+     */
     public void divide() {
 
         //Iterates through every element in dish
@@ -374,6 +392,10 @@ public class PetriDish {
         }
     }
 
+    /**
+     * Calls checkApoptosis on every cell simultaneously as well as adds a new
+     * cell depending on its neighbors.
+     */
     public void update() {
 
         //Initializing deep copy variable
@@ -456,12 +478,19 @@ public class PetriDish {
         }
     }
 
+    /**
+     * Runs move(), divide(), and update(), in that order. 
+     */
     public void iterate() {
         move();
         divide();
         update();
     }
     
+    /**
+     * Simulates game environment. Prints out board as well as applies any 
+     * move, divide, update, or iterate method called on the board.
+     */
     public void simulate() {
         Scanner sc = new Scanner(System.in);
         System.out.println(this);
@@ -473,6 +502,7 @@ public class PetriDish {
                 break;
             }
 
+            //Checks user input and calls respective methods
             switch(line){
                 case MOVE_KEY:
                     move();
@@ -491,6 +521,7 @@ public class PetriDish {
                     break;
             }
 
+            //Prints board/dish
             System.out.println(this);
         }
 

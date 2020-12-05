@@ -118,6 +118,9 @@ public abstract class Cell implements Comparable<Cell> {
      * @return
      */
     public int compareTo(Cell otherCell) {
+        if (otherCell == null) {
+            throw new NullPointerException("Cell cannot be null");
+        }
         return this.mass - otherCell.mass;
     }
 
