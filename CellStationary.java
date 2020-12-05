@@ -3,8 +3,8 @@
  * ID: A16669117
  * EMAIL: skhaw@ucsd.edu
  * 
- * This file contains the CellStationary class for PA7. It inherits from the 
- * Cell class. Its main function is to be a specific cell that has its own 
+ * This file contains the CellStationary class for PA7 & PA8. It inherits from
+ * the Cell class. Its main function is to be a specific cell that has its own
  * string representation and apoptosis methods.
  */
 
@@ -70,7 +70,9 @@ public class CellStationary extends Cell {
     }
 
     /**
+     * Creates a deep copy of this object
      * 
+     * @return Deep copy of this object
      */
     public Cell newCellCopy() {
         return new CellStationary(this);

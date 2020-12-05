@@ -3,9 +3,10 @@
  * ID: A16669117
  * EMAIL: skhaw@ucsd.edu
  * 
- * This file contains the Cell class for PA7. It is an abstract class. It 
- * contains a simple constructor method, copier, getter, and a method to deem
- * this cell as "dead". It's main purpose is to be inherited by other objects. 
+ * This file contains the Cell class for PA7 & PA8. It is an abstract class. 
+ * It contains a simple constructor method, copier, getter, and a method to 
+ * deem this cell as "dead". It's main purpose is to be inherited by other 
+ * objects. 
  */
 
 import java.util.List;
@@ -134,8 +135,10 @@ public abstract class Cell implements Comparable<Cell> {
     public abstract boolean checkApoptosis(List<Cell> neighbors);
 
     /**
+     * Abstract method that will be defined in other classes that inherit the
+     * Cell object
      * 
-     * @return
+     * @return Dependant on other classes' inheritance
      */
     public abstract Cell newCellCopy();
 } 

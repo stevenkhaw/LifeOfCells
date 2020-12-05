@@ -3,7 +3,7 @@
  * ID: A16669117
  * EMAIL: skhaw@ucsd.edu
  * 
- * This file contains the CellDivide class for PA7. It inherits from the 
+ * This file contains the CellDivide class for PA7 & PA8. It inherits from the
  * Cell class. Its main function is to be a specific cell that has its own 
  * string representation and apoptosis methods.
  */
@@ -74,15 +74,18 @@ public class CellDivide extends Cell implements Divisible {
     }
 
     /**
+     * Creates a deep copy of this object
      * 
+     * @return Deep copy of this object
      */
     public Cell newCellCopy() {
         return new CellDivide(this);
     }
 
     /**
+     * "Divides" cell dependant on cell direction
      * 
-     * @return
+     * @return int array for new location after cell division
      */
     public int[] getDivision() {
         int[] newDivision = new int[2];

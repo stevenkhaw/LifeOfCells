@@ -3,9 +3,9 @@
  * ID: A16669117
  * EMAIL: skhaw@ucsd.edu
  * 
- * This file contains the CellMoveToggleChild class for PA7. It inherits from 
- * the Cell class. Its main function is to be a specific cell that has its own 
- * string representation and apoptosis methods.
+ * This file contains the CellMoveToggleChild class for PA7 & PA8. It inherits
+ * from the Cell class. Its main function is to be a specific cell that has
+ * its own string representation and apoptosis methods.
  */
 
 import java.util.List;
@@ -73,6 +73,11 @@ public class CellMoveToggleChild extends CellMoveToggle {
         return false;
     }
 
+    /**
+     * Creates a deep copy of this object
+     * 
+     * @return Deep copy of this object
+     */
     public Cell newCellCopy() {
         return new CellMoveToggleChild(this);
     }

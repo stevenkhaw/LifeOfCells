@@ -3,9 +3,9 @@
  * ID: A16669117
  * EMAIL: skhaw@ucsd.edu
  * 
- * This file contains the CellMoveDiagonal class for PA7. It inherits from the 
- * Cell class. Its main function is to be a specific cell that has its own 
- * string representation and apoptosis methods.
+ * This file contains the CellMoveDiagonal class for PA7 & PA8. It inherits
+ * from the Cell class. Its main function is to be a specific cell that has
+ * its own string representation and apoptosis methods.
  */
 
 import java.util.List;
@@ -83,14 +83,19 @@ public class CellMoveDiagonal extends CellMoveUp {
     }
 
     /**
+     * Creates a deep copy of this object
      * 
+     * @return Deep copy of this object
      */
     public Cell newCellCopy() {
         return new CellMoveDiagonal(this);
     }
 
     /**
+     * Moves cell dependant on orientedRight and diagonalMoves instance
+     * variables
      * 
+     * @return int array for new location after cell movement
      */
     public int[] getMove() {
         int[] newPosition = new int[2];

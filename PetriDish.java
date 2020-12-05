@@ -3,8 +3,8 @@
  * ID: A16669117
  * EMAIL: skhaw@ucsd.edu
  * 
- * This file contains the PetriDish class for PA7. Its main function is to 
- * populate an instance variable full of objects that are determined by the 
+ * This file contains the PetriDish class for PA7 & PA8. Its main function is
+ * to populate an instance variable full of objects that are determined by the
  * given input as well as move, divide, and update them. There is also a 
  * simulate method that lets the user interface the game and call certain 
  * methods to maniupate the game board/dish. There is one instance 
@@ -80,6 +80,7 @@ public class PetriDish {
                     boardMass = Integer.parseInt(boardContent[1]); 
                 }                
 
+                //Adds new cell object onto disk element dependant on string
                 switch (boardCell) {
                     case (NULL_STRING):
                         this.dish[i][j] = null;
