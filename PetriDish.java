@@ -287,6 +287,18 @@ public class PetriDish {
                 }
             }
         }
+
+        //Update movables list instance variable 
+        movables.clear();
+
+        //Iterate through dish and add any cells that are movable to list
+        for (int u = 0; u < dish.length; u++) {
+            for (int v = 0; v < dish[0].length; v++) {
+                if (dish[u][v] instanceof Movable) {
+                    movables.add((Movable) dish[u][v]);
+                }
+            }
+        }
     }
 
     public void divide() {
@@ -345,6 +357,18 @@ public class PetriDish {
                             dish[newDivRow][newDivCol] = null;
                         }
                     }
+                }
+            }
+        }
+
+        //Update divisibles list instance variable 
+        divisibles.clear();
+
+        //Iterate through dish and add any cells that are divisible to list
+        for (int u = 0; u < dish.length; u++) {
+            for (int v = 0; v < dish[0].length; v++) {
+                if (dish[u][v] instanceof Divisible) {
+                    divisibles.add((Divisible) dish[u][v]);
                 }
             }
         }
@@ -410,6 +434,24 @@ public class PetriDish {
         for (int a = 0; a < dish.length; a++) {
             for (int b = 0; b < dish[0].length; b++) {
                 dish[a][b] = copyDish[a][b];
+            }
+        }
+
+        //Update movables and divisibles list instance variable 
+        movables.clear();
+        divisibles.clear();
+
+        /**
+         * Iterate through dish and add any cells that are movable/divisible
+         * to their respective instance variable list
+         */
+        for (int u = 0; u < dish.length; u++) {
+            for (int v = 0; v < dish[0].length; v++) {
+                if (dish[u][v] instanceof Divisible) {
+                    divisibles.add((Divisible) dish[u][v]);
+                } else if (dish[u][v] instanceof Movable) {
+                    movables.add((Movable) dish[u][v]);
+                }
             }
         }
     }
