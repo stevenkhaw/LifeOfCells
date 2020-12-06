@@ -536,7 +536,7 @@ public class PetriDish {
      * needed, the number will not change. CAN ONLY BE USED WITH THE DISH 
      * INSTANCE VARIABLE.
      * 
-     * @param row
+     * @param row int value of row index
      * @return int value of new wrapped/unwrapped row 
      */
     private int wrapRow(int row) {
@@ -556,7 +556,7 @@ public class PetriDish {
      * needed, the number will not change. CAN ONLY BE USED WITH THE DISH 
      * INSTANCE VARIABLE.
      * 
-     * @param col
+     * @param col int value of column index
      * @return int value of new wrapped/unwrapped column 
      */
     private int wrapCol(int col) {
@@ -569,5 +569,16 @@ public class PetriDish {
         }
         
         return newCol;
+    }
+
+    public static void main(String[] args) {
+        String[][] petri = new String[][]{ 
+            {"null", "null", "null", "null", "null"},
+            {"null", "CellStationary 2", "CellDivide 5", "CellStationary 11", "null"}, 
+            {"null", "CellMoveDiagonal 4", "CellMoveToggle 3", "CellMoveToggle 10", "CellStationary 3"},
+            {"null", "null", "CellDivide 2", "CellMoveUp 4", "null"}
+        };
+        PetriDish yes = new PetriDish(petri);
+        yes.simulate();
     }
 } 

@@ -114,14 +114,16 @@ public abstract class Cell implements Comparable<Cell> {
     }
 
     /**
+     * Compares this cell's math with other cell's mass
      * 
-     * @param otherCell
-     * @return
+     * @param otherCell Cell object being tested
+     * @return Difference of this mass to other mass
      */
     public int compareTo(Cell otherCell) {
         if (otherCell == null) {
             throw new NullPointerException("Cell cannot be null");
         }
+
         return this.mass - otherCell.mass;
     }
 
