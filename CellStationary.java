@@ -33,7 +33,7 @@ public class CellStationary extends Cell {
     public CellStationary(int currRow, int currCol, int mass) {
         super(currRow, currCol, mass);
     }
-
+ 
     /**
      * Calls parent function to initialzie object by copying from another
      * of the same object

@@ -252,7 +252,7 @@ public class PetriDish {
                         //Runs if new Movable cell has less mass
                         } else if (dish[newMoveRow][newMoveCol].mass > 
                                                             dish[i][j].mass) {
-                            
+                             
                             //Kills lighter Movable cell
                             dish[i][j].apoptosis();
 

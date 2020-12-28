@@ -81,7 +81,7 @@ public class CellDivide extends Cell implements Divisible {
     public Cell newCellCopy() {
         return new CellDivide(this);
     }
-
+ 
     /**
      * "Divides" cell dependant on cell direction
      * 

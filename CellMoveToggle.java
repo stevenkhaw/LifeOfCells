@@ -88,7 +88,7 @@ public class CellMoveToggle extends CellMoveUp {
     public Cell newCellCopy() {
         return new CellMoveToggle(this);
     }
-    
+     
     /**
      * Moves cell dependant on toggled instance variable
      * 

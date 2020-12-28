@@ -72,7 +72,7 @@ public class CellMoveToggleChild extends CellMoveToggle {
 
         return false;
     }
-
+ 
     /**
      * Creates a deep copy of this object
      * 

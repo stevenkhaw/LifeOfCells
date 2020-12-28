@@ -90,3 +90,4 @@ public class CellMoveUp extends Cell implements Movable {
         return newPosition;
     }
 }
+ 

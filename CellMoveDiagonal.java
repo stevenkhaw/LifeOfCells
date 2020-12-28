@@ -90,7 +90,7 @@ public class CellMoveDiagonal extends CellMoveUp {
     public Cell newCellCopy() {
         return new CellMoveDiagonal(this);
     }
-
+ 
     /**
      * Moves cell dependant on orientedRight and diagonalMoves instance
      * variables

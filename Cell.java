@@ -85,7 +85,7 @@ public abstract class Cell implements Comparable<Cell> {
         this.currCol = -1;
         this.mass = -1;
     }
-
+ 
     /**
      * Returns instance variable currRow
      * 
