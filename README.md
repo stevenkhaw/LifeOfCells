@@ -1,5 +1,5 @@
 # LifeOfCells
-`LifeOfCells` is a replication of John Conway's Game of Life. It is a cellular automation zero-player game that evolves determined by its initial state.
+`LifeOfCells` is a replication of John Conway's Game of Life. It is a cellular automation, zero-player game that evolves determined by its initial state.
 
 ## Features
 These rules compare the behavior of the automaton to real life:
